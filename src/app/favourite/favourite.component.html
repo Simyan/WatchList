@@ -1,0 +1,42 @@
+<p>favourite works!</p>
+<div class="card">
+
+    <div class="card-header">
+        Favourite List
+      </div>
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Genre</th>
+                  <th>Rating</th>
+                  <th>Type</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of favourites">                  
+                  <td>
+                    <!-- <a [routerLink]="['/detail', item.Id]">
+                      {{ item.Name }}
+                    </a> -->
+                    {{ item.Name }}
+                  </td>
+                  <td>{{ item.Genre }}</td>
+                  <td>{{ item.Rating }}</td>
+                  <td>{{ item.IsMovie }}</td>
+                  <td>
+                    <!-- <button class="btn btn-primary btn-sm"
+                            [routerLink]="['/detail', item.Id]">
+                      Edit
+                    </button> -->
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        
+    </div>
+</div>
