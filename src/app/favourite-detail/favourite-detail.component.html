@@ -1,0 +1,93 @@
+<p>favourite-detail works!</p>
+
+<div class="card-body">
+  <form 
+    novalidate 
+    (ngSubmit)="save()"
+    [formGroup]="favouriteForm">
+    <div class="form-group row mb-2">
+      <label class="col-md-2 col-form-label" for="favouriteNameId">Name</label>
+      <div class="col-md-8">
+        <input
+          class="form-control"
+          id="favouriteNameId"
+          type="text"
+          placeholder="Name (required)"
+          formControlName="favouriteName"
+          [ngClass]="{ 'is-invalid': (favouriteForm.get('favouriteName').touched ||
+          favouriteForm.get('favouriteName').dirty) &&
+          !favouriteForm.get('favouriteName').valid }"
+        />
+        <span class="invalid-feedback">
+          {{ displayMessage.favouriteName }}
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group row mb-2">
+      <label class="col-md-2 col-form-label" for="favouriteGenreId">Genre</label>
+      <div class="col-md-8">
+        <input
+          class="form-control"
+          id="favouriteGenreId"
+          type="text"
+          placeholder="Comedy (required)"
+          formControlName="favouriteGenre"
+          [ngClass]="{ 'is-invalid': (favouriteForm.get('favouriteGenre').touched ||
+          favouriteForm.get('favouriteGenre').dirty) &&
+          !favouriteForm.get('favouriteGenre').valid }"
+        />
+        <span class="invalid-feedback">
+          {{ displayMessage.favouriteGenre }}
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group row mb-2">
+        <label class="col-md-2 col-form-label" for="favouriteRatingId">Rating</label>
+        <div class="col-md-8">
+          <input
+            class="form-control"
+            id="favouriteRatingId"
+            type="number"
+            placeholder=" 8.2 (required)"
+            formControlName="favouriteRating"
+            [ngClass]="{ 'is-invalid': (favouriteForm.get('favouriteRating').touched ||
+          favouriteForm.get('favouriteRating').dirty) &&
+          !favouriteForm.get('favouriteRating').valid }"
+          />
+          <span class="invalid-feedback">
+            <span *ngIf="favouriteForm.get('favouriteRating').errors?.min || favouriteForm.get('favouriteRating').errors?.max">
+              Range is 0 - 10.
+            </span>
+          </span>
+        </div>
+      </div>
+     
+    <div class="form-group row mb-2">
+      <div class="col-md-8">
+        <div class="form-check">
+          <label class="form-check-label">
+            <input
+              class="form-check-input"
+              id="isMovieId"
+              type="checkbox"
+              formControlName="favouriteIsMovie"
+            />Movie
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row mb-2">
+        <div class="offset-md-2 col-md-4">
+          <button class="btn btn-primary mr-3"
+                  style="width:80px;"
+                  type="submit"
+                  [title]="favouriteForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+                  [disabled]="!favouriteForm.valid">
+            Save
+          </button>
+        </div>
+    </div>
+  </form>
+</div>

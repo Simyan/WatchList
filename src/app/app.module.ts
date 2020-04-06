@@ -4,19 +4,23 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { FavouriteData } from './favouriteData';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { FavouriteComponent } from './favourite/favourite.component';
+import { FavouriteDetailComponent } from './favourite-detail/favourite-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FavouriteComponent
+    FavouriteComponent,
+    FavouriteDetailComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    InMemoryWebApiModule.forRoot(FavouriteData)
+    InMemoryWebApiModule.forRoot(FavouriteData),
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
