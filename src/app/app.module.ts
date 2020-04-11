@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { FavouriteData } from './favouriteData';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module'
 
 import { AppComponent } from './app.component';
 import { FavouriteComponent } from './favourite/favourite.component';
@@ -20,7 +21,8 @@ import { FavouriteDetailComponent } from './favourite-detail/favourite-detail.co
     BrowserModule,
     HttpClientModule,
     InMemoryWebApiModule.forRoot(FavouriteData),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
