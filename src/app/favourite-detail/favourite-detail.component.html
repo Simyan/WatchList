@@ -13,13 +13,13 @@
           id="favouriteNameId"
           type="text"
           placeholder="Name (required)"
-          formControlName="favouriteName"
-          [ngClass]="{ 'is-invalid': (favouriteForm.get('favouriteName').touched ||
-          favouriteForm.get('favouriteName').dirty) &&
-          !favouriteForm.get('favouriteName').valid }"
+          formControlName="Name"
+          [ngClass]="{ 'is-invalid': (favouriteForm.get('Name').touched ||
+          favouriteForm.get('Name').dirty) &&
+          !favouriteForm.get('Name').valid }"
         />
         <span class="invalid-feedback">
-          {{ displayMessage.favouriteName }}
+          {{ displayMessage.Name }}
         </span>
       </div>
     </div>
@@ -32,13 +32,13 @@
           id="favouriteGenreId"
           type="text"
           placeholder="Comedy (required)"
-          formControlName="favouriteGenre"
-          [ngClass]="{ 'is-invalid': (favouriteForm.get('favouriteGenre').touched ||
-          favouriteForm.get('favouriteGenre').dirty) &&
-          !favouriteForm.get('favouriteGenre').valid }"
+          formControlName="Genre"
+          [ngClass]="{ 'is-invalid': (favouriteForm.get('Genre').touched ||
+          favouriteForm.get('Genre').dirty) &&
+          !favouriteForm.get('Genre').valid }"
         />
         <span class="invalid-feedback">
-          {{ displayMessage.favouriteGenre }}
+          {{ displayMessage.Genre }}
         </span>
       </div>
     </div>
@@ -51,13 +51,13 @@
             id="favouriteRatingId"
             type="number"
             placeholder=" 8.2 (required)"
-            formControlName="favouriteRating"
-            [ngClass]="{ 'is-invalid': (favouriteForm.get('favouriteRating').touched ||
-          favouriteForm.get('favouriteRating').dirty) &&
-          !favouriteForm.get('favouriteRating').valid }"
+            formControlName="Rating"
+            [ngClass]="{ 'is-invalid': (favouriteForm.get('Rating').touched ||
+          favouriteForm.get('Rating').dirty) &&
+          !favouriteForm.get('Rating').valid }"
           />
           <span class="invalid-feedback">
-            <span *ngIf="favouriteForm.get('favouriteRating').errors?.min || favouriteForm.get('favouriteRating').errors?.max">
+            <span *ngIf="favouriteForm.get('Rating').errors?.min || favouriteForm.get('Rating').errors?.max">
               Range is 0 - 10.
             </span>
           </span>
@@ -72,7 +72,7 @@
               class="form-check-input"
               id="isMovieId"
               type="checkbox"
-              formControlName="favouriteIsMovie"
+              formControlName="IsMovie"
             />Movie
           </label>
         </div>

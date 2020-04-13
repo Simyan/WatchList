@@ -1,5 +1,5 @@
 export interface Favourite {
-    Id: number;
+    id: number;
     Name : string;
     Genre: string;
     Rating: number;

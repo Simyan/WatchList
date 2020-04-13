@@ -6,10 +6,16 @@
       </div>
 
     <div class="card-body">
+      <h1>{{favourites.length}}</h1>
+      <button class="btn btn-primary btn-sm"
+                            [routerLink]="['/favourite/detail', 0]">
+                      Add
+                    </button> 
         <div class="table-responsive">
             <table class="table">
               <thead>
                 <tr>
+                  <th>Id</th>
                   <th>Name</th>
                   <th>Genre</th>
                   <th>Rating</th>
@@ -17,7 +23,8 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let item of favourites">                  
+                <tr *ngFor="let item of favouriteList | async">                  
+                  <td>{{ item.id }}</td>
                   <td>
                     <!-- <a [routerLink]="['/detail', item.Id]">
                       {{ item.Name }}
