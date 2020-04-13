@@ -22,7 +22,7 @@ export class FavouriteService {
       );
   }
 
-  getFavourtie(id : number) : Observable<Favourite> {
+  getFavourite(id : number) : Observable<Favourite> {
     return this.http.get<Favourite>(this.baseURL + '/' + id )
       .pipe(
         tap(data => console.log(JSON.stringify(data))),
@@ -42,7 +42,10 @@ export class FavouriteService {
 
   updateFavourite(body : Favourite) : Observable<Favourite> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.put<Favourite>(this.baseURL, body + '/' + body.id, {headers})
+    const url = `${this.baseURL}/${body.id}`;
+    console.log('Body:' + JSON.stringify(body));
+
+    return this.http.put<Favourite>(url, body, {headers})
     .pipe(
       tap(data => console.log(JSON.stringify(data))),
       catchError(this.handleError)
@@ -58,7 +61,7 @@ export class FavouriteService {
     } else {
       errorMessage = `Backend returned code ${err.status}: ${err.body.error}`;
     }
-    console.error(err);
+    console.error("ERROR:" + err);
     return throwError(errorMessage);
   }
 }

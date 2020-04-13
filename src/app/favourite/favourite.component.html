@@ -24,11 +24,15 @@
               </thead>
               <tbody>
                 <tr *ngFor="let item of favouriteList | async">                  
-                  <td>{{ item.id }}</td>
+                  <!-- <a [routerLink]="['/detail', item.Id]">
+                    {{ item.Name }}
+                  </a> -->
                   <td>
-                    <!-- <a [routerLink]="['/detail', item.Id]">
-                      {{ item.Name }}
-                    </a> -->
+                    <a [routerLink]="['/favourite/detail', item.id]">
+                      {{ item.id }}
+                    </a> 
+                  </td>
+                  <td>
                     {{ item.Name }}
                   </td>
                   <td>{{ item.Genre }}</td>
