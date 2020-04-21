@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, FormArray, Validators, FormControlName } from '@angular/forms';
 import {Favourite} from '../favourite';
 import { FavouriteService } from '../favourite.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, of, EMPTY } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-favourite-detail',
   templateUrl: './favourite-detail.component.html',
-  styleUrls: ['./favourite-detail.component.css']
+  styleUrls: ['./favourite-detail.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FavouriteDetailComponent implements OnInit {
 
@@ -17,6 +19,7 @@ export class FavouriteDetailComponent implements OnInit {
   displayMessage: { [key: string]: string } = {};
   errorMessage: string;
   private subscription : Subscription;
+ // mediumList = [];
 
   constructor(
     private fb : FormBuilder,
@@ -30,8 +33,9 @@ export class FavouriteDetailComponent implements OnInit {
       Name: ['', [Validators.required]],
       Genre: ['', [Validators.required]],
       Rating: ['', [Validators.min(0), Validators.max(10)]],
-      IsMovie: [] 
+      MediumId: ['', [Validators.required]],
     });
+    
 
     this.subscription = this.activatedRoute.paramMap.subscribe(
       params => {
@@ -44,6 +48,8 @@ export class FavouriteDetailComponent implements OnInit {
     );
 
   }
+
+
 
   save() {
     console.log(this.favouriteForm);
@@ -58,15 +64,19 @@ export class FavouriteDetailComponent implements OnInit {
         if(!fav.id || fav.id == 0)
         {
           
-          console.log("KUSSSOOO" + JSON.stringify(fav));
-          this.favouriteService.addFavourite(fav)
-            .subscribe({
-              next: () => this.onSaveComplete(),
-              error: err => this.errorMessage = err
-            });
+          console.log("Calling a service to add a new favourite" + JSON.stringify(fav));
+            this.favouriteService.addFavourite(fav)
+              .subscribe({
+                next: () => {
+                  this.onSaveComplete();
+                },
+                error: err => this.errorMessage = err
+              });
+          //this.favouriteService.onAdd(fav);
+          
         }
         else{
-          console.log("dUSSSOOO");
+          console.log("Calling Service to update favourite ");
           this.favouriteService.updateFavourite(fav)
             .subscribe({
               next: () => this.onSaveComplete(),
@@ -75,6 +85,7 @@ export class FavouriteDetailComponent implements OnInit {
         }
       }
       else{
+        console.log("Whoops")
         this.onSaveComplete();
       }
     }
@@ -84,8 +95,9 @@ export class FavouriteDetailComponent implements OnInit {
     }
   }
 
-  onSaveComplete() : void {
+  onSaveComplete() : void {    
     this.favouriteForm.reset();
+    console.log("Navigating away from OnSaveComplete")
     this.route.navigate(['/favourite/list']);
   }
 
@@ -109,8 +121,25 @@ export class FavouriteDetailComponent implements OnInit {
       Name : this.favourite.Name,
       Genre : this.favourite.Genre,
       Rating : this.favourite.Rating,
-      IsMovie : this.favourite.IsMovie
+      MediumId: this.favourite.MediumId,
     });
   }
 
+  mediums$ = this.favouriteService.mediums$.pipe(
+    catchError( err => 
+      {
+        //this.errorMessageSubject
+        return EMPTY;
+      })        
+   // error: err => this.errorMessage = err
+  );
+
+  
+
 }
+
+
+
+
+
+

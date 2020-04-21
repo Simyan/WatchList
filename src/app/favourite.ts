@@ -3,5 +3,6 @@ export interface Favourite {
     Name : string;
     Genre: string;
     Rating: number;
-    IsMovie: boolean;
+    MediumId: number;
+    MediumName?: string;
 }

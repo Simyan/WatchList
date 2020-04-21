@@ -1,4 +1,4 @@
-<p>favourite works!</p>
+
 <div class="card">
 
     <div class="card-header">
@@ -6,24 +6,24 @@
       </div>
 
     <div class="card-body">
-      <h1>{{favourites.length}}</h1>
+   
       <button class="btn btn-primary btn-sm"
                             [routerLink]="['/favourite/detail', 0]">
                       Add
                     </button> 
         <div class="table-responsive">
-            <table class="table">
+            <table *ngIf = "favourites$ | async as favourites" class="table">
               <thead>
                 <tr>
                   <th>Id</th>
                   <th>Name</th>
                   <th>Genre</th>
                   <th>Rating</th>
-                  <th>Type</th>
+                  <th>Medium</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let item of favouriteList | async">                  
+                <tr *ngFor="let item of favourites">                  
                   <!-- <a [routerLink]="['/detail', item.Id]">
                     {{ item.Name }}
                   </a> -->
@@ -37,16 +37,12 @@
                   </td>
                   <td>{{ item.Genre }}</td>
                   <td>{{ item.Rating }}</td>
-                  <td>{{ item.IsMovie }}</td>
-                  <td>
-                    <!-- <button class="btn btn-primary btn-sm"
-                            [routerLink]="['/detail', item.Id]">
-                      Edit
-                    </button> -->
-                  </td>
+                  <td>{{ item.MediumName }}</td>
                 </tr>
               </tbody>
+              
             </table>
+          
           </div>
         
     </div>
